@@ -17,3 +17,12 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(hw4)
 ```
+
+To use the function `lm2`:
+
+```{r}
+
+
+```
+
+
