@@ -65,10 +65,11 @@ lm2 <- function(formula, data, na.action = 'omit'){
   names(output) <- c("residuals", "rank", "fitted.values", "df.residual", "coefficients", "call", "model", "data.frame", "cf", "y")
 
   class(output) <- "lm2"
-  return(output)
-}
 
-print.lm2 <- function(m){
-  cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
-  print(m$coefficients)
+  print.lm2 <- function(m){
+    cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
+    print(m$coefficients)
+  }
+
+  return(output)
 }
