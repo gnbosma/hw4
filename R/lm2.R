@@ -67,8 +67,7 @@ lm2 <- function(formula, data, na.action = 'omit'){
   return(output)
 }
 
-#'@method print lm2
-#'@export
+#' @export
 print.lm2 <- function(m){
   cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
   print(m$coefficients)
