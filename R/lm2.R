@@ -12,10 +12,10 @@
 #'
 #'@export
 
-print.lm2 <- function(m){
-  cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
-  print(m$coefficients)
-}
+# print.lm2 <- function(m){
+#   cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
+#   print(m$coefficients)
+# }
 
 lm2 <- function(formula, data, na.action = 'omit'){
   #obtain indexes of which columns / covariates to keep

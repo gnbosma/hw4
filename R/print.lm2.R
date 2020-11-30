@@ -2,7 +2,7 @@
 #'
 #' Formats printing style for lm2 function
 #'
-#' @param m output of lm2 function
+#' @method print lm2
 #'
 #' @export
 
