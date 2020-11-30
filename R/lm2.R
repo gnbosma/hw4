@@ -67,3 +67,8 @@ lm2 <- function(formula, data, na.action = 'omit'){
   class(output) <- "lm2"
   return(output)
 }
+
+print.lm2 <- function(m){
+  cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
+  print(m$coefficients)
+}
