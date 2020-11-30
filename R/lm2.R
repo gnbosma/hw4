@@ -12,11 +12,6 @@
 #'
 #'@export
 
-# print.lm2 <- function(m){
-#   cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
-#   print(m$coefficients)
-# }
-
 lm2 <- function(formula, data, na.action = 'omit'){
   #obtain indexes of which columns / covariates to keep
   covariates <- all.vars(formula)
@@ -70,4 +65,11 @@ lm2 <- function(formula, data, na.action = 'omit'){
   names(output) <- c("residuals", "rank", "fitted.values", "df.residual", "coefficients", "call", "model", "data.frame", "cf", "y")
   class(output) <- "lm2"
   return(output)
+}
+
+#'@method print lm2
+#'@export
+print.lm2 <- function(m){
+  cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
+  print(m$coefficients)
 }
