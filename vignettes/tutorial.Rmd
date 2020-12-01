@@ -19,10 +19,9 @@ library(hw4)
 ```
 
 To use the function `lm2`:
-
 ```{r}
-
-
+exlm2 <- lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
 ```
+
 
 

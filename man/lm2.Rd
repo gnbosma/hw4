@@ -7,11 +7,11 @@
 lm2(formula, data, na.action = "omit")
 }
 \arguments{
-\item{formula}{an object of class "formula" that models regression to be fit}
+\item{formula}{An object of class "formula" that models regression to be fit}
 
-\item{data}{data frame to perform the linear regression on}
+\item{data}{Data frame to perform the linear regression on}
 
-\item{na.action}{character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean)}
+\item{na.action}{Character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean). Defaults to omit if excluded from call.}
 }
 \value{
 a list that contains the following values: residuals, rank, fitted.values, df.residual, coefficients, call, model, data.frame, cf, y

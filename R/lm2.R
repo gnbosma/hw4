@@ -2,11 +2,11 @@
 #'
 #'Used fit linear regression models
 #'
-#'@param formula an object of class "formula" that models regression to be fit
+#'@param formula An object of class "formula" that models regression to be fit
 #'
-#'@param data data frame to perform the linear regression on
+#'@param data Data frame to perform the linear regression on
 #'
-#'@param na.action character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean)
+#'@param na.action Character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean). Defaults to omit if excluded from call.
 #'
 #'@examples
 #'lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
