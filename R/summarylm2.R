@@ -39,9 +39,9 @@ summarylm2 <- function(output){
   names(Fstatdf) <- c("value", "numdf", "dendf")
   fpval <- pf(Fstat, p-1, n-p-1, lower.tail = FALSE)
 
-  sumoutput <- list(output$call, resid.table, output$cf, s, df, R2, R2adj, Fstat, vcov/s^2, fpval)
+  sumoutput <- list(output$call, resid.table, output$cf, s, df, R2, R2adj, fpval, vcov/s^2, Fstat)
   names(sumoutput) <- c("call", "residuals", "coefficients", "sigma", "df",
-                        "r.squared", "adj.r.squared", "fstatistic", "cov.unscaled", "F.pval")
+                        "r.squared", "adj.r.squared", "fstatistic", "cov.unscaled", "Fstat")
 
   pvalues <- as.vector(output$cf[,4])
   sig <- ifelse (pvalues <0.001, '***',
@@ -57,7 +57,7 @@ summarylm2 <- function(output){
   sig.codes <- "Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1"
 
   msg <- paste(c("Residual standard error: ", sumoutput$s, " on ", sumoutput$df[2], " degrees of freedom \nMultiple R-Squared: ",
-                 sumoutput$r.squared, ", Adjusted R-squared: ", sumoutput$adj.r.squared, "\nF-Statistic: ", sumoutput$fstat, " on ", sumoutput$df[3], " and ", sumoutput$df[2],
+                 sumoutput$r.squared, ", Adjusted R-squared: ", sumoutput$adj.r.squared, "\nF-Statistic: ", sumoutput$Fstat, " on ", sumoutput$df[3], " and ", sumoutput$df[2],
                  " DF, p-value: ", sumoutput$F.pval), collapse = '')
   cat(msg)
 

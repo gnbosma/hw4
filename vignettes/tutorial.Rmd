@@ -8,6 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(bench)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -15,13 +16,141 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+library(bench)
 library(hw4)
 ```
 
-To use the function `lm2`:
+### To use the function `lm2`:
+lm2 is a function that is designed to perform linear model regressions. A data set containing information regarding red wine quality named "wine" is included in this package for examples and tutorials.
+    
+**Call the function and assign to exlm2** *Note: na.action defaults to omit if call is excluded*
 ```{r}
-exlm2 <- lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
+lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine)
 ```
 
+**Use na.action `impute`**
+```{r}
+lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, 
+    na.action = 'impute')
+```
 
+**Use na.action `fail`**
+```{r}
+lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, 
+    na.action = 'fail')
+```
+
+**Additional information exported**       
+Above, we can see that the formula and data calls are required. There is additional information exported "invisibly". To access this information, including residuals, degrees of freedom, and rank etc, we must index our saved output using the `$`:
+```{r}
+# save the output
+saved_output <- lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, 
+                    data = wine) 
+
+saved_output$rank
+```
+
+**Two ways to include interaction terms** 
+  
+1) Using * includes main effects and interaction 
+```{r}
+lm2(formula = quality ~ volatile.acidity * citric.acid , data = wine, na.action = 'fail')
+```
+  
+2. Using : includes only the interaction and omits main effects
+```{r}
+lm2(formula = quality ~ volatile.acidity : citric.acid , data = wine, na.action = 'fail')
+```
+
+### Benchmark `lm2` against `lm`:
+In this section, we will compare the outputs of lm2 against current method lm. To begin, we will save the outputs from both `lm2` and `lm` functions.
+```{r, results = 'hide'}
+quality_lm2 <- lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, 
+                   data = wine)
+
+quality_lm <- lm(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine)
+```
+      
+Below, we use `all.equal` and `mark` functions from base R and `bench` package, respectively, to compare outputs from `lm2` and `lm`.
+  
+**Compare: Coefficients **
+```{r}
+all.equal(quality_lm2$coefficients, quality_lm$coefficients) 
+bench::mark(quality_lm2$coefficients, quality_lm$coefficients) 
+```
+  
+**Compare: Residuals**
+```{r}
+all.equal(quality_lm2$residuals, quality_lm$residuals) 
+bench::mark(quality_lm2$residuals, quality_lm$residuals)
+```
+
+**Compare: Rank**
+```{r}
+all.equal(quality_lm2$rank, quality_lm$rank) 
+bench::mark(quality_lm2$rank, quality_lm$rank)
+```
+
+**Compare: Fitted Values**
+```{r}
+all.equal(quality_lm2$fitted.values, quality_lm$fitted.values) 
+bench::mark(quality_lm2$fitted.values, quality_lm$fitted.values) 
+```
+
+**Compare: Model**
+```{r}
+all.equal(as.matrix(quality_lm$model), as.matrix(quality_lm2$model))
+bench::mark(as.matrix(quality_lm$model), as.matrix(quality_lm2$model))
+```
+
+### To use the function `summarylm2()`:
+summarylm2 is a function that is designed to take an output of function lm2 and deliver additional information that may be useful when executing a linear regression model. For these examples, we will occasionally use the output from an earlier example using `lm2` named `quality_lm2`. 
+
+**Two ways to call summarylm2**
+```{r}
+summarylm2(quality_lm2)
+summarylm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, 
+                   data = wine))
+```
+    
+**Additional information exported**       
+Above, we can see that it is necessary to use `summarylm2` in conjunction with `lm2`. Similar to before, there is additional information exported "invisibly". To access this information, including residual table (in quartiles), coefficients, standard error, t-values, and p-values etc, we must index our saved output using the `$`:
+```{r}
+# save the output
+saved_output <- summarylm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine))
+
+saved_output$coefficients
+```
+
+### Benchmark `summarylm2` against `summary`:
+In this section, we will compare the outputs of summarylm2 used in conjunction with lm2 against current method, summary used in conjunction to lm. To begin, we will save the outputs from both `lm2` and `lm` functions.
+```{r, results = 'hide'}
+quality_summarylm2 <- summarylm2(quality_lm2)
+
+quality_summarylm <- summary(quality_lm)
+```
+
+**Compare: Coefficients **
+```{r}
+all.equal(as.matrix(quality_summarylm2$coefficients), as.matrix(quality_summarylm$coefficients)) 
+bench::mark(as.matrix(quality_summarylm2$coefficients), as.matrix(quality_summarylm$coefficients))
+```
+
+**Compare: R Squared **
+```{r}
+all.equal(as.matrix(quality_summarylm2$r.squared), as.matrix(quality_summarylm$r.squared)) 
+bench::mark(as.matrix(quality_summarylm2$r.squared), as.matrix(quality_summarylm$r.squared))
+```
+
+**Compare: Adjusted R Squared **
+```{r}
+all.equal(quality_summarylm2$adj.r.squared, quality_summarylm$adj.r.squared)
+bench::mark(quality_summarylm2$adj.r.squared, quality_summarylm$adj.r.squared)
+```
+
+**Compare: Unscaled Covariance **
+```{r}
+all.equal(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
+bench::mark(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
+```
 
