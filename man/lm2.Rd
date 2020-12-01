@@ -19,3 +19,10 @@ a list that contains the following values: residuals, rank, fitted.values, df.re
 \description{
 Used fit linear regression models
 }
+\examples{
+lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
+example <- lm2(formula = quality ~ free.sulfur.dioxide:pH + pH, data = wine)
+example$residuals
+example$coefficients
+
+}

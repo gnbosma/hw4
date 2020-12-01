@@ -8,6 +8,12 @@
 #'
 #'@param na.action character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean)
 #'
+#'@examples
+#'lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
+#'example <- lm2(formula = quality ~ free.sulfur.dioxide:pH + pH, data = wine)
+#'example$residuals
+#'example$coefficients
+#'
 #'@return a list that contains the following values: residuals, rank, fitted.values, df.residual, coefficients, call, model, data.frame, cf, y
 #'
 #'@export
@@ -63,7 +69,9 @@ lm2 <- function(formula, data, na.action = 'omit'){
 
   output <- list(resid, nrow(betas), fitted, n-p, betas[,1], call, data, x, coefs, y)
   names(output) <- c("residuals", "rank", "fitted.values", "df.residual", "coefficients", "call", "model", "data.frame", "cf", "y")
-  class(output) <- "lm2"
+
+  cat("Call: ", output$call, ' ', "Coefficients: ", sep = '\n')
+  print(output$coefficients)
 
   return(invisible(output))
 }

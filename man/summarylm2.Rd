@@ -15,3 +15,11 @@ a list that contains the following values: call, residuals, coefficients, sigma,
 \description{
 Summarize fit for linear regression models
 }
+\examples{
+lm2output<-lm2(formula = quality ~ free.sulfur.dioxide:pH + pH, data = wine)
+summarylm2(lm2output)
+example <- summarylm2(lm2output)
+example$sigma
+example$coefficients
+
+}
