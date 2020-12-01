@@ -1,0 +1,12 @@
+#'print_lm2
+#'
+#'Used to print lm2 outputs
+#'
+#'@param m A list output by lm2 function
+#'
+#'@export
+
+print_lm2 <- function(m){
+  cat("Call: ", m$call, ' ', "Coefficients: ", sep = '\n')
+  print(m$coefficients)
+}

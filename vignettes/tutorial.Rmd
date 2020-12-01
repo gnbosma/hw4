@@ -154,3 +154,9 @@ all.equal(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
 bench::mark(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
 ```
 
+
+```{r}
+#revisit f stat
+```
+
+
