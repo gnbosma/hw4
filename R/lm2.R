@@ -64,12 +64,6 @@ lm2 <- function(formula, data, na.action = 'omit'){
   output <- list(resid, nrow(betas), fitted, n-p, betas[,1], call, data, x, coefs, y)
   names(output) <- c("residuals", "rank", "fitted.values", "df.residual", "coefficients", "call", "model", "data.frame", "cf", "y")
   class(output) <- "lm2"
-  UseMethod('lm2')
-  return(output)
-}
 
-#'@export
-print.lm2 <- function(output){
-  cat("Call: ", output$call, ' ', "Coefficients: ", sep = '\n')
-  print(output$coefficients)
+  return(invisible(output))
 }
