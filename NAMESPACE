@@ -2,4 +2,5 @@
 
 export(lm2)
 export(print_lm2)
+export(print_summarylm2)
 export(summarylm2)

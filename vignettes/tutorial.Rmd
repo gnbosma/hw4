@@ -20,18 +20,19 @@ library(bench)
 library(hw4)
 ```
 
-### To use the function `lm2`:
-lm2 is a function that is designed to perform linear model regressions. A data set containing information regarding red wine quality named "wine" is included in this package for examples and tutorials.
+### To use the function `lm2` and `print_lm2`:
+lm2 is a function that is designed to perform linear model regressions. print_lm2 is a function that is designed to print the output from lm2. A data set containing information regarding red wine quality named "wine" is included in this package for examples and tutorials.
     
-**Call the function and assign to exlm2** *Note: na.action defaults to omit if call is excluded*
+**Call the function lm2 and use print_lm2 to print output**         
+*Note: na.action defaults to omit if call is excluded*
 ```{r}
-lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine)
+print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine))
 ```
 
 **Use na.action `impute`**
 ```{r}
-lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, 
-    na.action = 'impute')
+lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine,
+    na.action='impute')
 ```
 
 **Use na.action `fail`**
@@ -54,17 +55,17 @@ saved_output$rank
   
 1) Using * includes main effects and interaction 
 ```{r}
-lm2(formula = quality ~ volatile.acidity * citric.acid , data = wine, na.action = 'fail')
+print_lm2(lm2(formula = quality ~ volatile.acidity * citric.acid , data = wine))
 ```
   
 2. Using : includes only the interaction and omits main effects
 ```{r}
-lm2(formula = quality ~ volatile.acidity : citric.acid , data = wine, na.action = 'fail')
+print_lm2(lm2(formula = quality ~ volatile.acidity : citric.acid , data = wine, na.action = 'fail'))
 ```
 
 ### Benchmark `lm2` against `lm`:
 In this section, we will compare the outputs of lm2 against current method lm. To begin, we will save the outputs from both `lm2` and `lm` functions.
-```{r, results = 'hide'}
+```{r}
 quality_lm2 <- lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, 
                    data = wine)
 
@@ -103,7 +104,7 @@ all.equal(as.matrix(quality_lm$model), as.matrix(quality_lm2$model))
 bench::mark(as.matrix(quality_lm$model), as.matrix(quality_lm2$model))
 ```
 
-### To use the function `summarylm2()`:
+### To use the function `summarylm2()` and `print_summarylm2`:
 summarylm2 is a function that is designed to take an output of function lm2 and deliver additional information that may be useful when executing a linear regression model. For these examples, we will occasionally use the output from an earlier example using `lm2` named `quality_lm2`. 
 
 **Two ways to call summarylm2**
@@ -112,7 +113,11 @@ summarylm2(quality_lm2)
 summarylm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, 
                    data = wine))
 ```
-    
+  
+**Print Output**
+```{r}
+print_lm2(summarylm2(quality_lm2))
+```
 **Additional information exported**       
 Above, we can see that it is necessary to use `summarylm2` in conjunction with `lm2`. Similar to before, there is additional information exported "invisibly". To access this information, including residual table (in quartiles), coefficients, standard error, t-values, and p-values etc, we must index our saved output using the `$`:
 ```{r}
@@ -153,10 +158,11 @@ bench::mark(quality_summarylm2$adj.r.squared, quality_summarylm$adj.r.squared)
 all.equal(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
 bench::mark(quality_summarylm2$cov.unscaled, quality_summarylm$cov.unscaled)
 ```
-
-
+  
+**Compare: F statistics and P values **
 ```{r}
-#revisit f stat
+all.equal(quality_summarylm2$fstatistic, quality_summarylm$fstatistic)
+bench::mark(quality_summarylm2$fstatistic, quality_summarylm$fstatistic)
 ```
 
 

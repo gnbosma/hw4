@@ -6,7 +6,7 @@
 #'
 #'@param data Data frame to perform the linear regression on
 #'
-#'@param na.action Character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'mean impute' (replace NA values with column mean). Defaults to omit if excluded from call.
+#'@param na.action Character input that determines how the regression model should handle missing data. Options include 'omit' (remove rows with NA values), 'fail'(halt regression), or 'impute' (replace NA values with column mean). Defaults to omit if excluded from call.
 #'
 #'@examples
 #'lm2(formula = fixed.acidity ~ volatile.acidity + citric.acid * residual.sugar, data = wine)
@@ -33,7 +33,7 @@ lm2 <- function(formula, data, na.action = 'omit'){
       data <- na.omit(data)
     } else if (na.action == 'fail'){
       stop("Dataset contains missing values.")
-    } else if (na.action == 'mean impute'){
+    } else if (na.action == 'impute'){
       for(i in 1:ncol(data)){
         data[is.na(data[,i]), i] <- mean(data[,i], na.rm = TRUE)
       }
