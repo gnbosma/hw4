@@ -49,7 +49,7 @@ lm2 <- function(formula, data, na.action = 'omit'){
   colnames(x)[1] <- '(Intercept)'
   betas <- solve(t(x) %*% x) %*% t(x) %*% y
   fitted <- as.vector(as.vector(x %*% betas))
-  names(fitted) <- 1:nrow(x)
+  names(fitted) <- row.names(data)
 
   # Variance & Residuals
   resid <- as.vector(y - x %*% betas)

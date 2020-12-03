@@ -62,7 +62,7 @@ print_lm2(lm2(formula = quality ~ volatile.acidity * citric.acid , data = wine))
   
 2. Using : includes only the interaction and omits main effects
 ```{r}
-print_lm2(lm2(formula = quality ~ volatile.acidity : citric.acid , data = wine, na.action = 'fail'))
+print_lm2(lm2(formula = quality ~ volatile.acidity : citric.acid , data = wine))
 ```
 
 ### Benchmark `lm2` against `lm`:
