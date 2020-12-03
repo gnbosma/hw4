@@ -165,4 +165,3 @@ all.equal(quality_summarylm2$fstatistic, quality_summarylm$fstatistic)
 bench::mark(quality_summarylm2$fstatistic, quality_summarylm$fstatistic)
 ```
 
-
