@@ -2,6 +2,14 @@ test_that("lm2: test default na.action works", {
   expect_output(print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine)))
 })
 
+test_that("lm2: test na.impute na.action works", {
+  expect_output(print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, na.action = 'impute')))
+})
+
+test_that("lm2: test na.impute na.action works", {
+  expect_error(print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, na.action = 'fail')))
+})
+
 test_that("lm2: Rank Correct", {
   expect_equal(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar,
                    data = wine)$rank, 4)
