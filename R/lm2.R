@@ -16,6 +16,8 @@
 #'
 #'@return a list that contains the following values: residuals, rank, fitted.values, df.residual, coefficients, call, model, data.frame, cf, y
 #'
+#'@importFrom stats model.matrix na.omit pf pt quantile
+#'
 #'@export
 
 lm2 <- function(formula, data, na.action = 'omit'){

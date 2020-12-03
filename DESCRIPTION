@@ -13,9 +13,12 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    stats
 Suggests: 
     knitr,
     rmarkdown,
     testthat,
-    covr
+    covr, 
+    bench
 VignetteBuilder: knitr

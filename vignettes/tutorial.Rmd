@@ -9,6 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 library(bench)
+library(stats)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -16,7 +17,6 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(bench)
 library(hw4)
 ```
 
