@@ -53,7 +53,7 @@ lm2 <- function(formula, data, na.action = 'omit'){
 
   # Variance & Residuals
   resid <- as.vector(y - x %*% betas)
-  names(resid) <- c(1:nrow(x))
+  names(resid) <- row.names(data)
   SSyy=sum((y-mean(y))^2)
   SSE=sum(resid^2)
   s <- sqrt( SSE/(n-p))

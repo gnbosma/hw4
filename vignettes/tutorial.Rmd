@@ -31,14 +31,16 @@ print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.suga
 
 **Use na.action `impute`**
 ```{r}
-lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine,
-    na.action='impute')
+# note slight difference from previous example: we've imputed missing values with column means
+print_lm2(lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine,
+    na.action='impute'))
 ```
 
 **Use na.action `fail`**
-```{r}
-lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, 
-    na.action = 'fail')
+```{r, error = TRUE}
+# we expect an error as the dataset wine contains missing variables
+# lm2(formula = quality ~ volatile.acidity + citric.acid + residual.sugar, data = wine, 
+    #na.action = 'fail')
 ```
 
 **Additional information exported**       
@@ -76,6 +78,7 @@ Below, we use `all.equal` and `mark` functions from base R and `bench` package, 
   
 **Compare: Coefficients **
 ```{r}
+# Note default na.action matches lm function
 all.equal(quality_lm2$coefficients, quality_lm$coefficients) 
 bench::mark(quality_lm2$coefficients, quality_lm$coefficients) 
 ```

@@ -5,7 +5,7 @@
 \alias{wine}
 \title{Wine Quality Data}
 \format{
-An object of class \code{data.frame} with 50 rows and 12 columns.
+An object of class \code{data.frame} with 50 rows and 13 columns.
 }
 \source{
 \href{https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009}{Kaggle}
