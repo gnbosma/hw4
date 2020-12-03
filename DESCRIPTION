@@ -1,5 +1,5 @@
 Package: hw4
-Title: What the Package Does (One Line, Title Case)
+Title: Computes and Prints Linear Regression Models 
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Grace",
