@@ -15,4 +15,4 @@ devtools::install_github("gnbosma/hw4")
 ```
 
 ## Use 
-This R Package contains two functions, lm2 and summarylm2. Call lm2 if you are interested in obtaining residuals, rank, fitted values, degrees freedom, coefficients, or predicted values of a lienar model. Call summarylm2 if you are interested in obtaining sigma value, (adjusted) R squared values, F-statistics, p-values or covariance structures.
+This R Package contains two functions, lm2 and summarylm2. Call lm2 if you are interested in obtaining residuals, rank, fitted values, degrees freedom, coefficients, or predicted values of a linear model. Call summarylm2 if you are interested in obtaining sigma value, (adjusted) R squared values, F-statistics, p-values or covariance structures.
